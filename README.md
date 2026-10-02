@@ -49,6 +49,10 @@ For example:
 
 Bundled reference paths resolve from the directory containing the loaded `SKILL.md`, even when the skill is installed outside the project. Project planning documents and generated outputs belong in the project or its selected planning directory.
 
-## Continuing Improvement
+## Self-Evolution During Use
 
-I will continue improving this skill as I use it. Practical project experience will help me identify unclear requirements, missing outputs, responsibility conflicts, and guidance that needs updating. I will use those findings to refine the stage structure, improve the requirements and outputs, and revisit the supporting technical evidence.
+For a new project, the skill creates `plan/distilled-experiences.md` in the project workspace. When the user explicitly requests distillation, the assistant records a short, reusable lesson from the work. After a major correction, it asks whether that lesson should be distilled. This turns practical experience into a record that the developer can review.
+
+A developer can use those lessons to revise their copy of `SKILL.md` and the relevant `references/` while using the skill. For example, a lesson may reveal a question that needs clarification, a missing output field, an unclear aspect boundary, or technical guidance that needs updating. The revised skill can guide later stage sessions. Approved project documents still need their own review and approval when a design decision changes.
+
+I will continue improving the skill through this process as I use it and revisit its supporting evidence when techniques change.
