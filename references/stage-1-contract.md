@@ -2,134 +2,193 @@
 
 **Current deliverable:** `01-requirements-and-architecture.docx`.
 
-Use this contract only when this stage is active. Follow the shared workflow, document rules and required end matter in [the skill entrypoint](../SKILL.md).
-Read earlier approved project-document decisions only when a current aspect depends on them. References to other stages identify consumed decisions or future handoff owners; they do not request another stage's requirement contract.
-All `references/...` paths in the aspect instructions below resolve from the directory containing the selected `SKILL.md`, even outside the project; use absolute resolved paths with file tools. Markdown links resolve from this contract's directory. Inspect technique headings and select only the paragraphs/procedures needed at this aspect's current design depth; broad links do not request every subsection. Use heading-only navigation in cross-stage technique files, without broad body-keyword searches. For guidance from another stage's technique file, identify the active decision it informs and omit instructions for that stage's authoritative choices; do not load its contract.
+This contract defines the Stage 1 decisions and document content. Apply the shared workflow and document rules in [SKILL.md](../SKILL.md).
 
-**Technique guidance:** [stage-1-requirements-and-architecture.md](stage-1-requirements-and-architecture.md).
+**Output applicability:** The `### output` lists describe candidate content, not mandatory artifact or field checklists. Select the outputs and level of detail useful for the project's size, complexity and actual decisions. Small projects may use short paragraphs, simplify tables or omit unnecessary outputs. Retain the shared aspect headings and required end matter, and briefly explain inapplicable aspects. Record unresolved information that affects a needed decision.
 
-### 1.1 Goals, business scenario, and users
+The Mermaid layer diagram in 1.6 is required for every project; scale its detail to the design.
 
-Establish the business problem, current workflow, user groups, desired improvement, initial scope, and material assumptions. This aspect owns the canonical inclusion, exclusion and deferral decisions and business-outcome indicators. Use 1.2 for function acceptance, 1.3 for acting authority and human escalation, and 1.4 for operating governance and cost/latency targets; link those decisions when the business scenario depends on them.
+## 1.1 Business goals, scope, and users
 
-**Requirements**
-- Ask the user which business problem and observable improvement justify the project, and record the confirmed purpose in the scope decision before evaluating technical options.
-- For each priority business need, agree on an observable business-outcome indicator, its baseline or baseline-collection action, and desired improvement in the business-need table; reference 1.2 acceptance and 1.4 cost/latency targets when relevant.
-- Record current business steps, handoffs, exceptions and bottlenecks in the user/workflow list, and connect their observed baseline outcomes to the desired improvement in the business-need table.
-- Ask who performs and receives each business task, and record those participants and business responsibilities in the user/workflow list; refer to 1.3 for authorized escalation roles and 1.4 for system operation/change ownership.
-- Agree the first-release in-scope and out-of-scope business tasks with the user and record the sole canonical scope lists in the scope decision.
-- Identify assumptions that could change the project scope or expected benefit, and record each premise, evidence or status, owner, validation action and decision consequence in the assumption log.
-- When several business workflows are requested, agree the coherent first-release slice, deferred slices and business prerequisites in the scope decision; leave execution coupling and synchronization choices to 1.5.
+### To clarify
 
-**Output**
-- A confirmed scope decision stating the business problem, desired improvement, evidence of need, canonical in-scope and out-of-scope tasks, first-release slice, deferrals and business prerequisites.
-- A user/workflow list naming user groups, representative tasks, business responsibilities, current steps, handoffs, exceptions and bottlenecks, with links to authority or governance decisions when relevant.
-- A business-need-to-indicator table with observable outcome, business indicator, baseline or collection action, desired improvement, measurement approach, and references to 1.2 acceptance and 1.4 cost/latency targets where applicable.
-- An assumption log naming each material premise, evidence or status, owner, validation action and possible scope consequence.
+- What business problem should the first release solve?
+- Who performs and receives each task? What steps, handoffs, exceptions and bottlenecks exist today?
+- Which tasks are included, excluded or deferred? What business prerequisites constrain the first release?
+- What observable improvement would justify the project? Which baselines are available?
 
-*Technique reference: `references/stage-1-requirements-and-architecture.md` (constraint translation).*
+### output
 
-### 1.2 Functions, outputs, and success criteria
+- **Business and scope decision:** problem, first-release tasks, exclusions, deferrals and business prerequisites.
+- **User and current-workflow description:** task participants, business responsibilities, current steps, handoffs, exceptions and bottlenecks.
+- **Business-indicator table:** priority need, observable benefit, indicator, baseline or collection action, desired improvement and measurement approach.
+- **Assumption log:** uncertain premise, evidence or status, owner, validation action and effect on scope or benefit.
 
-Specify prioritized functions, their inputs and user-facing outputs, audience, acceptable end states and communication criteria, with a small real-task evaluation seed. This aspect owns functional and response contracts, including partial, failed and insufficient-evidence outcomes. Consume the scope in 1.1, approval and human-handoff decisions in 1.3, and cost/latency targets in 1.4; leave routing, retry mechanics, schemas and scoring implementations to later aspects.
+### out of scope
 
-**Requirements**
-- For reachable missing-input and ambiguous requests, agree the clarification or missing-information response in the failure-mode table; for approval-paused actions, reference the 1.3 approval rule and specify only the user-visible pending state.
-- For each prioritized function, agree the task end state, required constraints and observable completion evidence, and record them in the function table separately from communication-quality criteria.
-- Ask which functions permit useful partial results, and record in the failure-mode table when to show verified completed parts, identify missing work and label the overall task incomplete; record failure or escalation for functions requiring an atomic outcome.
-- For reachable execution failures, agree the permitted user-visible partial, deferred, stopped or escalated outcome in the failure-mode table, referencing 1.3 handoff and 1.4 budgets; defer retry classification, counters and replay mechanics to 2.3 and 3.1.
-- For source-dependent outputs, agree the retrievable source identifiers, available page/section/record locators and unsupported-claim behavior, and record those requirements in the function table; 2.5 and 3.3 will choose the grounding and validation mechanisms.
-- Ask the user what makes each result clear and useful to its audience, and record the output format and communication-quality criteria in the function table; mark unmeasured performance expectations as open instead of inventing claims.
-- Prioritize the scoped functions with the user and record a representative acceptance case and agreed review criterion for each outcome in the function table; for excluded task IDs from 1.1, agree the decline, redirect or authorized handoff behavior in the out-of-scope response table.
-- Capture a small seed of real highest-priority tasks in the early evaluation seed, recording each input, acceptable end state, key required or prohibited constraints and linked function; hand the approved seed to 4.1 for expansion and versioning.
-- Record references to the applicable 1.4 cost and latency target IDs in each affected function and seed case; ask the constraint owner to resolve missing targets through 1.4 rather than entering independent target values.
+Functional acceptance belongs to 1.2; acting permissions and approvals to 1.3; service responsibilities, governance and per-task cost or latency targets to 1.4. Technique and architecture choices belong to 1.5 and 1.6.
 
-**Output**
-- A prioritized function table with input, user-visible outcome and audience, output format, verified end state and evidence, communication-quality criteria, citation requirements, representative acceptance case, review criterion and applicable constraint references.
-- An early real-task evaluation seed linked to priority functions, with input, acceptable end state, required and prohibited constraints, source and references to applicable approved targets.
-- A failure-mode table for reachable missing-input, ambiguity, approval-paused, partial, failed, deferred and stopped outcomes, stating trigger, user-visible behavior, completion status and references to the governing approval/handoff or budget decision.
-- An out-of-scope response table referencing the canonical excluded task IDs in 1.1 and recording the intended decline, redirect or authorized handoff behavior without repeating the scope list.
+### Prerequisite
 
-*Technique reference: `references/stage-1-requirements-and-architecture.md` (success definition).*
+None.
 
-### 1.3 Authority levels and human involvement
+### Technical references
 
-Establish acting identities, logical role and data-visibility entitlements, consequential-action approval rules, and the authorized human-escalation contract. This aspect owns which actions require approval, who may decide, the decision window and denial or unavailable paths, and the permitted handoff context. Consume the business scope, output/evidence contract and applicable obligations from 1.1, 1.2 and 1.4; Stage 2 selects trusted enforcement and pause/continuation mechanics.
+- When translating a business need into a measurable improvement, see [requirement-to-indicator-translation.md](technological%20documentations/requirement-to-indicator-translation.md) for reference.
 
-**Requirements**
-- Ask which user, agent or service acts on each scoped task, and record its logical role, permitted resource/action scope, data visibility and accountable authority owner in the actor/access decision; defer enforcement mechanisms to 2.6 or the baseline security boundary in 2.9.
-- For each consequential action, agree which missing intent, authority, required evidence or risk condition requires clarification, review or a safe stop, and record that policy in the approval matrix using 1.2 evidence requirements; do not use model self-confidence as authorization.
-- For each approval-gated action, agree the authorized reviewer, action and context presented, decision window, and denial or reviewer-unavailable path, and record them in the approval matrix.
-- Inventory scoped consequential actions and decide each approval trigger from the applicable policy, reversibility, actor permissions and impact, recording the classification in the approval matrix before execution mechanics are designed.
-- Agree human-handoff triggers and an authorized receiving role, then record the user notice and permitted context package—goal, attempted and verified completed work, current state, blocker, pending decision and evidence identifiers—in the human-escalation contract.
-- Agree the policy for absent, expired, revoked or insufficient authority for a consequential action, and record whether to seek clarification or renewed approval, defer, or stop in the approval matrix; refer to 1.2 for the user-visible completion message.
+## 1.2 Functions, outputs, and acceptance
 
-**Output**
-- A confirmed actor-and-access decision naming user, agent or service identities, logical roles, resource/action entitlements, data visibility and the accountable authority owner, without prescribing enforcement mechanics.
-- An approval matrix recording consequential action, policy/risk/reversibility classification, trigger and authority conditions, required evidence references, authorized reviewer, review subject and context, decision window, denial/unavailable path and missing or expired authority outcome.
-- A human-escalation contract naming trigger, authorized receiving role, user notice and permitted goal, attempted/verified work, state, blocker, pending decision and evidence or case/artifact identifiers.
+### To clarify
 
-*Technique reference: `references/stage-2-development-and-model-layer.md` (routing, guardrails).*
+- For each included task, what input, audience, output format and observable end state define completion?
+- Which functions have priority, and what constraints distinguish an acceptable result from an unacceptable one?
+- Which outputs require sources? What identifiers or locators must let the user check a supported claim?
+- Which missing-input, ambiguous, partial, failed or stopped outcomes are reachable? What should the user see, and when can verified completed parts remain useful?
+- Which real task examples can demonstrate functional correctness and communication quality separately?
 
-### 1.4 Compliance, governance, cost, and latency constraints
+### output
 
-Confirm applicable obligations, organizational governance and change ownership, required audit policy, and the canonical per-task cost and workload-specific latency targets. This aspect owns constraint applicability and accountability, including audit purpose, content exposure, access and retention. Use 1.3 for acting and approval authority; later aspects select enforcement controls, allocate phase budgets, define telemetry fields and verify compliance against these approved constraints.
+- **Prioritized function table:** function ID, linked scope item, priority, input, audience, output format, end state, constraints, completion evidence, communication criteria and representative acceptance case.
+- **Claim-support requirements:** source-dependent output, required citation identifiers and locators, and the response when support is insufficient.
+- **Outcome and failure table:** reachable condition, user-visible response, completion status and whether verified partial results may be retained. Record the visible review-pending outcome if relevant; 1.3 determines when approval is required.
+- **Out-of-scope response table:** reference the exclusions in 1.1 and state the decline, redirect or handoff response.
+- **Real-task acceptance seed:** real input and source, linked function, acceptable end state, required or prohibited constraints and review criterion. Keep correctness and communication checks distinct.
 
-**Requirements**
-- For each material governance, data, cost or latency constraint, confirm its owner and target or pending decision, and record a summary row with required verification evidence and any release-gate reference in the constraints table.
-- Have the accountable legal, compliance or policy owner confirm each applicable obligation, and record its source/version, concrete duty, affected data/action, required control outcome and verification evidence in the obligation matrix; bind concrete control designs by later aspect reference.
-- When an obligation or governance need requires an audit trail, agree the consequential decision/change classes to retain and the permitted actor/version/result/correlation information, content minimization, access and retention policy in the governance/audit decision; leave concrete event fields and export mechanics to 4.4.
-- Record each uncertain legal or policy applicability question in the obligation matrix with the accountable reviewer and confirmation gate, and keep it pending until that owner determines whether it applies.
-- Agree the runtime owner and authorized changers and reviewers for prompts, tools, knowledge and policy, and record their versioned change, review and audit responsibilities in the governance decision; use 1.3 for actor/action approval policy.
-- Agree a per-task cost ceiling and workload-specific end-to-end latency objective, and record their metric, measurement boundary, percentile or attainment goal where relevant, window and owner in the cost/latency decision; defer phase allocation and trace-based validation to 3.6 and 4.4.
-- Give each approved cost and latency target a canonical constraint ID and decision owner in the cost/latency decision, link the constraints summary to that record, and route later target changes through revision and approval of 1.4.
+### out of scope
 
-**Output**
-- A constraints summary table with canonical ID, affected workflow or data, governance/data/cost/latency category, owner, confirmed target or pending decision, verification-evidence requirement, release-gate reference and link to the authoritative detailed decision.
-- A versioned obligation matrix with rule source and jurisdiction, concrete duty, affected data/action, required control outcome, accountable owner, required verification or audit evidence, applicability status and review/confirmation trigger, linked to later concrete control designs.
-- A canonical per-task cost and workload-latency decision naming target ID, metric, measurement boundary, ceiling or objective, percentile or attainment goal where applicable, window, owner and target-change approval path.
-- A governance and audit decision naming runtime/change/review responsibilities, required consequential event classes, audit purpose, permitted content, minimization, access and retention rules, and reasons any proposed audit need is unnecessary.
+Do not redefine the scope in 1.1. Permission and approval policy belongs to 1.3, accepted-source policy and cost or latency targets to 1.4. Routing, retries, grounding implementation and executable limits belong to Stages 2 and 3; Stage 4 expands the seed and defines scoring.
 
-*Technique reference: `references/stage-1-requirements-and-architecture.md` (compliance, governance).*
+### Prerequisite
 
-### 1.5 Architecture pattern and framework
+Consult 1.1 for included tasks, users, expected benefits and scope boundaries.
 
-Select the high-level architecture pattern and implementation approach from approved tasks, authority, constraints and technique scope, considering a deterministic workflow or direct model/API call before additional autonomy. This aspect owns the optional framework/runtime choice, component responsibility sketch and task-coupling assessment. Specify required orchestration, durability, approval, isolation and observability capabilities at architecture level; Stage 2 defines executable steps and control mechanisms, and Stage 5 defines deployed topology.
+### Technical references
 
-**Requirements**
-- Compare the viable direct call, deterministic workflow and agent patterns on approved representative tasks, and record the simplest sufficient pattern in the architecture decision with evidence and reasons for rejecting added routing or coordination in the alternatives table.
-- Assess each task's dependencies, shared mutable resources and read/write effects, then record the serial or parallel feasibility and synchronization/result-integration owner in the coupling assessment; defer launch, join and failure transitions to 2.3.
-- Locate the approved workflow's runtime uncertainty, choose fixed, model-directed or hybrid control, and record the required planning, durability, recovery and monitoring capabilities in the architecture decision and alternatives comparison.
-- Where approved tasks span sessions or approvals, compare candidate runtime support for durable state and pause/resume against the 1.3 approval contract, and record support evidence and limitations in the alternatives table.
-- Justify each selected architectural component and optional framework by the approved task, representative benefit and operating burden, recording viable simpler alternatives and rejection reasons in the architecture decision and comparison table.
-- Draw the chosen component-level pattern with control/data flow, state ownership and required approval or inspection boundaries in the high-level Mermaid diagram; annotate needed loop, recovery or pause capabilities without defining executable transitions or numerical limits.
-- Decide whether an execution harness is required, and record its component-level ownership of state, execution, authority, recovery and observability in the architecture decision and diagram; hand isolation/enforcement mechanisms to 2.6/2.9 and deployed placement to Stage 5.
+- When choosing representative real-task acceptance examples, see [task-acceptance-seed.md](technological%20documentations/task-acceptance-seed.md) for reference.
+- When choosing responses to reachable ambiguity, missing inputs or incomplete execution, see [output-failure-behavior.md](technological%20documentations/output-failure-behavior.md) for reference.
+- When defining traceable support for source-dependent answers, see [answer-evidence-traceability.md](technological%20documentations/answer-evidence-traceability.md) for reference.
 
-**Output**
-- A confirmed high-level architecture pattern and implementation approach, optional framework/runtime, architectural component responsibilities, required capabilities, supporting evidence and decision owner.
-- An alternatives table comparing viable patterns and implementation runtimes against approved tasks, state/recovery, approval, validation, integration capability and operating burden, with support evidence, simpler alternatives and selection/rejection reasons.
-- A high-level Mermaid component diagram showing control/data flow, state ownership, tools and stores as component roles, required approval/inspection boundaries and downstream capability owners without executable node or guard definitions.
-- A task-coupling assessment naming dependencies, shared mutable resources, read/write effects, concurrency feasibility, serial or parallel judgment, synchronization and result-integration owner.
+## 1.3 Authority and human involvement
 
-*Technique reference: `references/stage-1-requirements-and-architecture.md` (pattern catalogue, framework comparison).*
+### To clarify
 
-### 1.6 Technique scope decisions
+- Which user, agent or service identity acts on each task? Which resources may it read or change, and who grants that authority?
+- Which consequential actions require clarification, review, explicit approval or a stop? What authority and evidence must exist before proceeding?
+- Who may approve each action, what action and context must they see, and what happens if approval is denied or unavailable?
+- When is human referral needed? Which role may receive it, and what task information may be transferred?
 
-Decide whether approved tasks need retrieval, cross-session memory, reusable procedures (Skills), live connectivity or particular input/output modalities. This aspect owns technique inclusion, conditional activation and downstream responsibility. Record the user need and feasibility evidence without selecting connectors, retrieval topology, memory content/lifecycle controls or custom model methods; Stage 2 makes those architectural decisions and Stage 3 supplies detailed contracts.
+### output
 
-**Requirements**
-- For each candidate technique, ask which approved task needs it and record the yes/no inclusion decision, task evidence and rationale in the technique decision table.
-- Compare representative question classes with no retrieval and feasible evidence-access options, and record whether external retrieval is required and the coverage/freshness/authority constraints in the technique table; leave the selected direct-source or indexed route to 2.5.
-- Decide separately whether a reusable Skill procedure and live capability access are needed, and record the approved task, required capability and integration/authority constraints in separate technique rows; hand application/API/provider-tool/MCP selection to 2.2.
-- Ask which approved facts or preferences must be available across sessions, decide whether durable memory is needed within 1.3/1.4 constraints, and record the purpose, inclusion and 2.4 design handoff in the technique table; record no durable memory when none is needed.
-- Agree the input and output modalities required by each approved task and record them in the technique table, assigning model/API capability selection to 2.2 and any justified customization to 2.7.
-- Map each approved technique to its downstream owner and activated conditional aspects in the technique table, recording scope only; retain general aspects for baseline responsibilities when an optional technique is absent.
-- For each declined technique, record the omitted optional design work and the general responsibilities that still apply in the technique table, so later documents omit only the matching conditional work.
+- **Actor-and-access matrix:** task, acting identity, logical role, permitted resources and actions, data visibility and accountable authority owner.
+- **Approval matrix:** action, impact and reversibility, applicable authority policy, evidence conditions, review or stop trigger, authorized reviewer, information presented, decision window where needed, and denial or unavailable outcome linked to 1.2. Include expiry or revocation rules when applicable. Model confidence does not grant authority.
+- **Human-handoff policy:** trigger, authorized receiving role, user notice and permitted payload covering the goal, verified and attempted work, blocker, pending decision and evidence or artifact references. Link the visible outcome to 1.2; record when approval or referral is unnecessary.
 
-**Output**
-- A technique decision table naming approved task or evidence, technique and required capability, inclusion decision, rationale and constraint references, required modalities or memory purpose where relevant, downstream owner, activated conditional aspects, omitted optional work and continuing general responsibilities for declined techniques.
+### out of scope
 
-*Technique reference: `references/stage-2-development-and-model-layer.md` (tools, RAG scope) and `references/stage-1-requirements-and-architecture.md`.*
+Business participation belongs to 1.1 and visible result requirements to 1.2. Service preparation, operation and technical-change governance belong to 1.4. Trusted enforcement, credential handling, pause/resume mechanisms and isolation belong to later design stages.
 
-**Deliver and confirm:** Stage 1 Word document. Resolve scope-changing questions before advancing; leave detailed technology choices for Stage 2.
+### Prerequisite
 
+Consult 1.1 for scoped tasks and participants, and 1.2 for completion evidence and user-visible outcomes.
+
+### Technical references
+
+- When defining approval criteria for consequential actions, see [authority-and-approval-policy.md](technological%20documentations/authority-and-approval-policy.md) for reference.
+- When defining a permitted human referral and its context, see [human-handoff-policy.md](technological%20documentations/human-handoff-policy.md) for reference.
+
+## 1.4 Operating constraints and governance
+
+### To clarify
+
+- Which organizational, legal or compliance obligations apply to the actual workflow, jurisdiction, data and actors? Who confirms applicability?
+- Who prepares and operates the service, and who changes or reviews prompts, tools, databases, knowledge sources and policy?
+- Which source classes are acceptable, who accepts them, and which source checks are needed?
+- Which data objects may be used or retained, for what purpose and duration? Is an operational audit trail required, and who needs access to it?
+- What per-task cost and workload-specific latency targets are needed? What are the measurement boundaries, evidence, owners and target-change approval paths?
+
+### output
+
+- **Constraint summary:** constraint ID, category, affected function or data, owner, target or pending decision, verification evidence, release gate and owning-record reference.
+- **Obligation matrix:** authoritative source and version, jurisdiction, applicability, duty, affected action or data, required control outcome, evidence, owner, status and review trigger. Unconfirmed applicability needs an owner and confirmation action.
+- **Service and change-governance decision:** preparation, operation, change and review responsibilities; accepted source classes, acceptance owner and required source checks. Reference 1.3 permissions and 1.2 claim-support requirements.
+- **Data and audit policy:** data object, purpose, permitted use, access-policy reference and retention. Distinguish chat history, request/checkpoint state, reusable evidence and audit records. When audit is needed, state its purpose, event classes, actor/version/result/correlation information, minimization, reviewer access and retention.
+- **Cost and latency target table:** linked function or workload, metric, measurement boundary, objective or ceiling, percentile or attainment goal where relevant, window, owner and change-approval path. Missing targets need a measurement action. This table owns service targets; consumers reference it.
+
+### out of scope
+
+Do not redefine 1.1 business indicators, 1.2 claim-support requirements or 1.3 action permissions. Later stages design controls, allocate budgets, define instrumentation and verification procedures, and choose deployed placement.
+
+### Prerequisite
+
+Consult 1.1 for business scope, 1.2 for functions and evidence needs, and 1.3 for acting identities, permissions and approval policy.
+
+### Technical references
+
+- When determining obligation applicability and accountable roles, see [obligation-applicability-assessment.md](technological%20documentations/obligation-applicability-assessment.md) for reference.
+- When selecting workload-specific cost and latency targets, see [cost-and-latency-target-selection.md](technological%20documentations/cost-and-latency-target-selection.md) for reference.
+- When deciding whether an operational audit trail is needed, see [audit-trail-need-assessment.md](technological%20documentations/audit-trail-need-assessment.md) for reference.
+
+## 1.5 Technique scope
+
+### To clarify
+
+- Which tasks need external evidence, and is adequate, sufficiently fresh evidence accessible within the approved permissions and source policy?
+- Which tasks need a reusable procedure? Which separately need live data access or an external action?
+- Which facts or preferences must intentionally be recalled across sessions? Would ordinary conversation history, request state, checkpoints or reusable evidence already meet the need?
+- Which input and output modalities are required?
+- For each candidate technique, what task benefit justifies inclusion, what condition activates it, and what feasibility limit could change the scope?
+
+### output
+
+- **Technique decision table:** technique, linked task, need and evidence, yes/no/conditional inclusion, rationale, constraint references, feasibility limits and downstream design owner.
+- **Capability scope:** evidence need and feasible coverage/freshness for retrieval; separate procedure and live-access needs; intended cross-session recall purpose; required input/output modalities. Reference existing source, access and data policies.
+- **Conditional-work summary:** selected and omitted optional work, activation conditions and scope changes that require revision of 1.1. Declining a technique does not remove general tool, context or integration responsibilities.
+
+### out of scope
+
+Do not select detailed connectors, retrieval routes, memory content schemas or customization methods here. Stage 2 designs the selected capabilities and integrations; Stage 3 defines exact contracts and settings. Source acceptance and data retention remain owned by 1.4, and component state responsibility by 1.6.
+
+### Prerequisite
+
+Consult 1.1–1.4 for task scope, accepted outcomes, permissions, source policy, data policy and operating constraints.
+
+### Technical references
+
+- When deciding whether tasks need retrieval, see [retrieval-need-assessment.md](technological%20documentations/retrieval-need-assessment.md) for reference.
+- When deciding whether tasks need a reusable procedure, see [reusable-procedure-need-assessment.md](technological%20documentations/reusable-procedure-need-assessment.md) for reference.
+- When deciding whether tasks need live data or external actions, see [live-access-need-assessment.md](technological%20documentations/live-access-need-assessment.md) for reference.
+- When deciding whether intentional cross-session recall is needed, see [agent-memory-need-assessment.md](technological%20documentations/agent-memory-need-assessment.md) for reference.
+- When establishing required input/output modalities, see [modality-requirements-assessment.md](technological%20documentations/modality-requirements-assessment.md) for reference.
+
+## 1.6 Architecture and framework
+
+### To clarify
+
+- Can direct calls or deterministic code meet the agreed tasks? Where does execution require a model to choose the next action?
+- Which planning, coordination, state, durability, recovery, review and observability capabilities do the approved tasks require?
+- Which tasks depend on each other or share mutable resources? Which can run independently, and who integrates their results?
+- Which layers does the user want in the project, such as frontend, backend and memory, and how should they connect?
+- Which architecture and runtime satisfy these needs with the least operating burden? What evidence supports the selection and rejection of alternatives?
+- Is a separate harness, gateway, queue, distributed executor or state/memory service justified by a concrete need?
+
+### output
+
+- **Architecture decision and alternatives table:** representative task, candidate approach, fixed/model-directed/hybrid control, required capabilities, supporting evidence, limitations, operating burden, selection or rejection reason and decision owner.
+- **Framework/runtime selection:** implementation approach, viable candidates and documented versions, fit to the selected architecture, state/durability/recovery/approval support, integration limits and reasons for the choice.
+- **Mermaid layer diagram (required):** show the user's chosen project layers and the connections between them.
+- **Task-coupling assessment:** task dependencies, shared resources, read/write effects, serial or parallel feasibility, synchronization responsibility, result-integration owner and partial-result requirements referenced from 1.2.
+
+### out of scope
+
+Do not redefine task scope, acceptance, authority, governance or technique inclusion from 1.1–1.5. This aspect records the user's chosen project layers and their connections. Executable nodes, guards, routing, retries, exact limits and enforcement mechanisms belong to Stages 2 and 3; Stage 5 selects concrete deployment topology, infrastructure sizing and placement using these architectural decisions.
+
+### Prerequisite
+
+Consult 1.1–1.5 for scoped tasks, acceptance criteria, authority, operating constraints and selected capabilities.
+
+### Technical references
+
+- When selecting an agent architecture, see [agent-architecture-selection.md](technological%20documentations/agent-architecture-selection.md) for reference.
+- When assessing serial or parallel task execution, see [task-coupling-assessment.md](technological%20documentations/task-coupling-assessment.md) for reference.
+- When selecting a framework or runtime, see [agent-framework-selection.md](technological%20documentations/agent-framework-selection.md) for reference.
+- When deciding whether a separate agent harness or infrastructure component is needed, see [agent-harness-need-assessment.md](technological%20documentations/agent-harness-need-assessment.md) for reference.

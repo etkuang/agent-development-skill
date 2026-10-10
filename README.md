@@ -4,55 +4,60 @@ A reusable skill for turning an AI agent idea into a clear, reviewable implement
 
 The skill is intended for new LLM agent applications and substantial redesigns. Each stage produces a Word document for explicit user approval. The six approved documents form the implementation handoff.
 
+## What's New in v2.0.0
+
+Compared with the [legacy edition](https://github.com/etkuang/agent-development-skill), this version makes the guidance easier to select and the planning documents easier to apply:
+
+- **Focused technical guidance:** Six broad technical reference files have been replaced by 106 technique guides. Each aspect states when to consult a guide, so the assistant can load the material needed for the current decision.
+- **Restructured stage contracts:** Each aspect separates clarification questions, document outputs, scope exclusions, prerequisites, and conditional technical references. Aspects follow their dependencies, with each decision and artifact assigned to one authoritative owner.
+- **Deliverables scaled to the project:** Output lists are candidate content that can be simplified according to the project's size, complexity, and actual decisions, while preserving the required document structure and approval gates.
+- **Expanded technical coverage:** New focused guides address [remote-agent integration](references/technological%20documentations/remote-agent-integration-selection.md), [repeated-trial success measurement](references/technological%20documentations/repeated-trial-success-measurement.md), and [provider lifecycle and availability checks](references/technological%20documentations/provider-lifecycle-availability-check.md). Existing guidance has also been reviewed against public technical sources.
+
+When continuing a project planned with the legacy edition, align its document headings, aspect IDs, and reference paths with the current stage contracts. Review and explicitly approve each revised document before relying on it in later stages.
+
 ## How I Developed This Skill
 
-I organized 100 Bilibili tutorial videos about agent development and used transcription software to turn their content into Markdown notes. These notes gave me a broad collection of development approaches, techniques, and examples.
+I collected agent development tutorials from across the internet and organized them into Markdown notes. With Codex, I designed six planning stages, defined each aspect's scope, decisions, outputs, and prerequisites, and connected them to technical guidance.
 
-I combined what I learned from the tutorials with my own practical experience in agent development to shape the skill's structure. I organized the material into stages, defined the responsibilities of each aspect, and identified the decisions and outputs needed at each stage.
+I asked Codex to research official documentation and primary sources, develop focused technique guides, and record product versions and access dates. I also defined context selection, the clarification and approval workflow, and shared Word document standards. Each stage produces a Word document for explicit approval before the next stage begins.
 
-I then asked Codex to research public technical documentation and supporting evidence for every requirement and output. This review aimed to align the guidance with current techniques at the time of review. Sources retain relevant product or version information and access dates so the evidence can be revisited as technology changes.
-
-I also asked Codex to review the practical usefulness and scope clarity of the requirements and outputs. Each requirement should clarify a real user need or a concrete design decision and direct an identifiable output or check. Within a stage, every decision and artifact has one authoritative aspect owner. When a topic appears again in a later stage, its additional design detail and approved inputs must be clear.
-
-These drafting and review steps produced the current skill. The tutorial notes informed its development; the released skill and its technical references are self-contained and use public website sources.
+Feedback, structural and reference checks, and planning walkthroughs helped reveal gaps, clarify ownership, and scale outputs to project needs. The resulting skill contains six stage contracts and 106 technique guides, linked to public sources through the review certificate. The released skill is self-contained; tutorial notes and development records remain private.
 
 ## Review Certificate
 
-The [requirement review certificate](requirement-review-certificate.md) lists the 429 audited requirement and output IDs, the public website resources used in their review, and the batch evidence IDs. It records the review completed from September 29 to October 1, 2026.
+The [requirement review certificate](requirement-review-certificate.md) maps all 106 technique documents to the public website resources supporting them. The latest technical review was completed on October 10, 2026. Each guide records relevant product or version information and source access dates.
 
 ## Six Planning Stages
 
 | Stage | Main focus | Word deliverable |
 | --- | --- | --- |
 | [1. Requirements and architecture](references/stage-1-contract.md) | User needs, scope, success criteria, constraints, and the high-level architecture. | `01-requirements-and-architecture.docx` |
-| [2. Development and model layer](references/stage-2-contract.md) | Workflow, models, tools, data, and control mechanisms. | `02-workflow-and-technology-selection.docx` |
-| [3. Detailed design](references/stage-3-contract.md) | Concrete prompts, schemas, configurations, interfaces, and execution contracts. | `03-detailed-agent-design.docx` |
-| [4. Evaluation](references/stage-4-contract.md) | Cases, metrics, scoring, observations, and evaluation gates. | `04-evaluation.docx` |
-| [5. Deployment](references/stage-5-contract.md) | Environments, serving, capacity, release procedures, and recovery. | `05-deployment.docx` |
-| [6. Operations and iteration](references/stage-6-contract.md) | Feedback, monitoring, lifecycle responsibilities, and controlled improvement. | `06-operations-and-iteration.docx` |
+| [2. Development and model layer](references/stage-2-contract.md) | Context, memory, evidence, security, integrations, models, and workflow design. | `02-workflow-and-technology-selection.docx` |
+| [3. Detailed design](references/stage-3-contract.md) | Concrete schemas, call contracts, prompts, settings, resource lifecycles, and implementation checks. | `03-detailed-agent-design.docx` |
+| [4. Evaluation](references/stage-4-contract.md) | Metrics, cases, graders, tracing, evaluation runs, and CI gates. | `04-evaluation.docx` |
+| [5. Deployment](references/stage-5-contract.md) | Serving, persistence, scaling, release checks, recovery, cost governance, and rollout. | `05-deployment.docx` |
+| [6. Operations and iteration](references/stage-6-contract.md) | Change governance, monitoring, incident recovery, feedback, and controlled maintenance. | `06-operations-and-iteration.docx` |
 
-Earlier stages establish scope and constraints. Later stages refine the design using approved decisions and confirmed information. Conditional aspects apply only when the approved design uses the corresponding capability.
+Earlier stages establish scope and constraints; later stages refine approved decisions. Keep ordinary aspect headings and briefly explain any inapplicability. Include optional aspects only when the approved design uses the corresponding capability, and end every document with **Decisions and unresolved questions** and **References**.
 
 ## Using the Skill
 
-1. Make the complete skill folder available to your AI assistant, including [SKILL.md](SKILL.md) and `references/`.
-2. Provide a project brief describing the intended users, tasks, desired outcomes, available data or tools, and known constraints. Start with Stage 1 for a new project.
-3. Work through the current stage's questions and decisions. Review its Word document and explicitly approve the delivered version before advancing.
-4. Start each subsequent stage in a fresh conversation. Provide the approved document versions and only the earlier decision excerpts needed for that stage.
-5. After Stage 6 approval, use the six approved documents as the design handoff and give a separate instruction to begin implementation.
+1. Provide the complete skill folder: [SKILL.md](SKILL.md) and `references/`.
+2. Describe users, tasks, outcomes, data, tools, and constraints. Begin with Stage 1.
+3. Review and explicitly approve each delivered Word document before advancing.
+4. Use a fresh conversation for each subsequent stage, identifying approved versions, approval evidence, and necessary earlier decisions.
+5. After Stage 6 approval, separately instruct implementation using the six approved documents.
 
-For example:
+> Use agent-development to plan a policy assistant; start at Stage 1.
 
-> Use the agent-development skill to plan an internal policy assistant. Start with Stage 1, clarify the missing requirements, and prepare the requirements and architecture document for my review.
+The assistant loads shared instructions, applicable current-stage aspects, and necessary technique, approved-document, and code excerpts. It verifies changing details against official sources and researches the web when no guide applies.
 
-`SKILL.md` contains the shared workflow and routes to six separate stage contracts. The assistant loads only the current stage's requirements, relevant technical guidance, and necessary approved project inputs. Keeping all references on disk does not require loading them all into the conversation.
+Reference paths resolve from the skill folder; project outputs belong in the selected planning directory. Document approval covers the design. Required calibration, security, capacity, and recovery checks must pass before their corresponding adoption, production action, or traffic exposure.
 
-Bundled reference paths resolve from the directory containing the loaded `SKILL.md`, even when the skill is installed outside the project. Project planning documents and generated outputs belong in the project or its selected planning directory.
+## Project Experience and Skill Maintenance
 
-## Self-Evolution During Use
+Each project uses one experiences file, normally `plan/distilled-experiences.md` or its equivalent in the selected planning directory. Record concise, reusable lessons only on explicit request; after a major correction, the assistant asks whether to record one. Relevant lessons inform later planning.
 
-For a new project, the skill creates `plan/distilled-experiences.md` in the project workspace. When the user explicitly requests distillation, the assistant records a short, reusable lesson from the work. After a major correction, it asks whether that lesson should be distilled. This turns practical experience into a record that the developer can review.
+Record proposed skill changes in that file. Compare them with `SKILL.md` and `references/` for missing guidance. Adding a lesson to `SKILL.md` requires explicit user approval of its exact wording, placement, and word-count effect; implement approved changes in a separate maintenance task. Changes to approved project designs require revised documents and renewed approval.
 
-A developer can use those lessons to revise their copy of `SKILL.md` and the relevant `references/` while using the skill. For example, a lesson may reveal a question that needs clarification, a missing output field, an unclear aspect boundary, or technical guidance that needs updating. The revised skill can guide later stage sessions. Approved project documents still need their own review and approval when a design decision changes.
-
-I will continue improving the skill through this process as I use it and revisit its supporting evidence when techniques change.
+I will refine the skill through use and revisit sources as techniques change.

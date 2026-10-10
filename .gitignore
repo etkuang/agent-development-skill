@@ -1,6 +1,7 @@
-AGENTS.md
-notes/
-.planning/
-temp/
-release/
-*.log
+# Local planning records, private source notes, and temporary files
+/.planning/
+/notes/
+/temp/
+
+# Workspace instructions
+/AGENTS.md
